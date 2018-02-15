@@ -4,9 +4,9 @@ var User = require('../schemas/users');
 var config = require('../config');
 var jwt = require('jsonwebtoken');
 
-router.post('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
   
-    var token = req.body.token;
+    var token = req.headers['x-access-token'];;
 
     if (token) {
         jwt.verify(token, config.secret, function(err, decoded) {      
@@ -16,7 +16,7 @@ router.post('/', function(req, res, next) {
             // if everything is good, save to request for use in other routes
             req.decoded = decoded;    
             
-            User.findById(req.body.id, function(err, result) {
+            User.findById(req.headers.id, function(err, result) {
                 res.send(result);
             })
           }
