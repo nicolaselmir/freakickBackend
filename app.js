@@ -36,10 +36,10 @@ console.log('socket listening on port ', 3001);
 mongoose.connect(config.database); // connect to database
 
 io.on('connection', function (socket) {
-    console.log('connectd');
-    
+    console.log('connected');
+    //socket.join(mes.roomId);
     socket.on('new message', (mes) => {
-      //socket.join(mes.roomId);
+      
       const message = new Message({
         roomId: mes.roomId,
         text: mes.message,  
@@ -86,6 +86,9 @@ app.use('/api/login', login);
 app.use('/api/profile',profile);
 app.use('/api/matches',matches);
 app.use('/api/competitions',competitions);
+app.use('/api/newRoom', newRoom);
+app.use('/api/newMessage', newMessage);
+app.use('/api/getMessages', getMessages);
 
 app.use('/api/chat',chat);
 app.use('/api/chats',getChats);
