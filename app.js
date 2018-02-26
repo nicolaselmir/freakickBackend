@@ -1,4 +1,6 @@
 var express = require('express');
+var server = require('http').Server(express);
+const io = require('socket.io')();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -23,8 +25,44 @@ var competitions = require('./routes/competitions');
 var chat = require('./routes/chat');
 var getChats = require('./routes/getChat');
 
+var newRoom = require('./routes/newRoom');
+var newMessage = require('./routes/newMessage');
+var getMessages = require('./routes/getMessages');
+
+
 var app = express();
+io.listen(3001);
+console.log('socket listening on port ', 3001);
 mongoose.connect(config.database); // connect to database
+
+io.on('connection', function (socket) {
+    console.log('connectd');
+    
+    socket.on('new message', (mes) => {
+      //socket.join(mes.roomId);
+      const message = new Message({
+        roomId: mes.roomId,
+        text: mes.message,  
+        user: mes.user._id,
+      });
+      message.save(function (err, res){
+        if(err){
+            console.log(err); 
+        } else {
+           console.log(res);
+           socket.broadcast.emit('new message', {
+             _id: res._id,
+             text: res.text,
+             roomId: mes.roomId,
+             createdAt: res.createdAt,
+             user: {
+               _id: mes.user._id,
+             }
+           });
+        }
+      })
+    });
+  });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
