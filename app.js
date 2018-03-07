@@ -22,14 +22,12 @@ var profile = require('./routes/profile');
 var matches = require('./routes/matches');
 var competitions = require('./routes/competitions');
 
-var chat = require('./routes/chat');
-var getChats = require('./routes/getChat');
-
-
 const Message = require('./schemas/messages');
 var newRoom = require('./routes/newRoom');
 var newMessage = require('./routes/newMessage');
 var getMessages = require('./routes/getMessages');
+var addFavTeam = require('./routes/addFavTeam');
+var getFavs = require('./routes/getFavs');
 
 
 var app = express();
@@ -93,8 +91,7 @@ app.use('/api/competitions',competitions);
 app.use('/api/newRoom', newRoom);
 app.use('/api/newMessage', newMessage);
 app.use('/api/getMessages', getMessages);
-
-app.use('/api/chat',chat);
-app.use('/api/chats',getChats);
+app.use('/api/addFavTeam', addFavTeam);
+app.use('/api/getFavs', getFavs);
 
 module.exports = app;
