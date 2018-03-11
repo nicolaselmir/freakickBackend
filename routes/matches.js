@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
             et_score: item.et_score,
             penalty_local: item.penalty_local,
             penalty_visitor: item.penalty_visitor,
-            events:item.events
+            events:item.events,
         });
         return info;
     });
