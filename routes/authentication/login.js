@@ -22,10 +22,11 @@ router.post('/', function(req, res, next) {
 
         User.findById(user._id, function(err, result) {
             if (err) throw err;
+            console.log(result);
             user.token = token;
             user.save(function(err) {
                 if (err) throw err;
-                res.send({success:true})            
+                res.send({success:true, id: result._id})            
               });
           });
         
