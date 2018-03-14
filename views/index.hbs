@@ -1,48 +1,12 @@
     <!DOCTYPE html>
-    <title>Creating a Chat Application in Node JS with Express, MongoDB, Mongoose and Socket.io</title>
+    <title>Not Authorized</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
-           <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>    
-           <div class="container">
-        <br>
-        <div class="jumbotron">
-            <h1 class="dispaly-4">Start Chatting</h1>
-            <br>
-            <input id="txtName" class="form-control" placeholder="Name" type="text">
-            <br>
-            <textarea id="txtMessage" class="form-control" placeholder="Message"></textarea>
-            <br>
-            <button id="send" class="btn btn-success">Send</button>
-        </div>
-        <div id="messages"></div>
-            <script>
-        $(() => {
-            $("#send").click(() => {
-                var chatMessage = {
-                    name: $("#txtName").val(), message: $("#txtMessage").val()
-                }
-            $.post( "http://localhost:3000/api/chat",chatMessage);
-            })
-
-            $.get("/api/chats", (chats) => {
-             chats.forEach(addChat)
-             var socket = io();
-             socket.on("chat", addChat)
-         })
-
-
-
-window.setInterval(function(){
-  /// call your function here
-}, 5000);
-
-
-
-    function addChat(chatObj){
-        $("#messages").append(`<h5>${chatObj.name} </h5><p>${chatObj.message}</p>`);
-    }
-        })
-    </script>
+           <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+           <div class="container" style="margin-top:20;">
+             <h1>You dont have access to this Page.</h1>
+             <p>Not Authorized</p>
+           </div>
     </div>
